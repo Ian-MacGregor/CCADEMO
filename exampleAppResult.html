@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- This document corresponds with the "exampleAppInput.html" document
+     and it is shown to the user only if the APL server associated with
+     this example has provided a reasonable response.  This page parses
+     the JSON provided by the APL server and presents it to the user. -->
+<html>
+<head>
+    <title>Example Result Page</title>
+    <style>
+        /* Style settings for the calculator's input form*/
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { /* Style for headings */
+            text-align: center;
+            color: #333;
+        }
+
+        p { /* Style for body text */
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body> <!-- Actual HTML for displaying the result: -->
+    <div class="container">
+      <h1>Thank you for submitting the form!</h1>
+      <p id="resultText">Your data has been successfully received and processed.</p>
+    </div>
+    <script>
+      var resultObjs = sessionStorage.getItem('calcResult');
+      if (resultObjs) {
+        resultObjs = JSON.parse(resultObjs).calc;
+        resultObjs = 'Result of calculations: $ ' + resultObjs;
+        document.getElementById('resultText').innerHTML = resultObjs;
+      }
+    </script>
+</body>
+</html>
