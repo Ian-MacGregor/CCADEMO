@@ -10,7 +10,7 @@
     "rewrite": "Index.html"
   },
   "globalHeaders": {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "http://172.178.80.5",
     "Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS"
   }
 }
