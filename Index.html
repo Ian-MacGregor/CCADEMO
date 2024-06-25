@@ -177,11 +177,11 @@
     
          }).then(response => response.json()).then(responseData => {
                sessionStorage.setItem('calcResult', JSON.stringify(responseData));
-               window.location.href = 'Index.html';
+               window.location.href = 'exampleAppResult.html';
 
             }).catch(error => {
                   alert('Error submitting the form. Please try again later.');
-                  window.location.href = 'Index.html';
+                  window.location.href = 'exampleAppError404.html';
                });
 
       });
