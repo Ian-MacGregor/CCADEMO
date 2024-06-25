@@ -3,7 +3,7 @@
   "routes": [
     {
       "route": "/test",
-      "redirect": ["/Index.html"]
+      "redirect": "/Index.html"
     }
   ]
   "globalHeaders": {
