@@ -6,7 +6,7 @@
       "redirect": "/Index.html"
     },
     {
-      "route": "",
+      "route": "/",
       "redirect": "/Index.html"
     }
   ],
