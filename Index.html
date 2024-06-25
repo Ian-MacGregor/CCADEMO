@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example APL Based Calculator</title>
+    <style>
+      /* Style settings for the calculator's input form*/
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f2f2f2; /* Off-white */
+      }
+
+      .container {
+        display: flex;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff; /* White */
+        border-radius: 8px;
+      }
+
+      .left-column {
+        flex: 1;
+        padding: 30px;
+      }
+
+      .right-column {
+        flex: 1;
+        padding: 30px;
+        border-left: 1px solid #ccc; /* Light grey */
+      }
+
+      h1 { /* Style for headings */
+        color: #333; /* Dark grey */
+        margin-bottom: 30px;
+      }
+
+      p { /* Style for body text */
+        color: #666; /* Grey */
+        line-height: 1.6;
+      }
+
+      form { 
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      label { /* Style for form prompts */
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      input,
+      select { /* Style for user entered text */
+        padding: 12px;
+        border: 1px solid #ccc; /* Light grey */
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      select { /* Style for dropdowns */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        background-size: 10px 10px;
+        padding-right: 30px;
+      }
+
+      input[type="submit"] { /* Style for submit button */
+        background-color: #4CAF50; /* Green */
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        padding: 14px 20px;
+        transition: background-color 0.3s ease;
+        width: 100%;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049; /* Slightly darker green */
+      }
+      
+      /* Special screen size style (i.e. mobile) */
+      @media screen and (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .left-column,
+        .right-column {
+          padding: 20px;
+        }
+
+        form {
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body> <!-- Actual HTML for drawing the input form -->
+    <div class="container">
+      <div class="left-column"> <!-- Descriptive text -->
+        <h1>Example APL Calculator Heading</h1>
+        <p> Welcome to the Example Calculator. Please fill out the form below to do some APL calculations with. </p>
+        <p> APL is fun! </p>
+      </div>
+      <div class="right-column">
+        <form id="calcForm"> 
+             <div class="form-row">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+          </div>
+          <div class="form-row">
+            <label for="spouse">Spouse:</label>
+            <select id="spouse" name="spouse" required>
+              <option disabled selected value=""></option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="netWorth">Net Worth:</label>
+            <input type="number" id="netWorth" name="netWorth" required>
+          </div>
+          <div class="form-row">
+            <label for="monthlyIncome">Monthly Income:</label>
+            <input type="number" id="monthlyIncome" name="monthlyIncome" required>
+          </div>
+          <div class="form-row">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-row">
+            <label for="monthlyExpenses">Monthly Expenses:</label>
+            <input type="number" id="monthlyExpenses" name="monthlyExpenses" required>
+          </div>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <script>
+      const form = document.forms[0]; // getElementById('calcForm');
+
+      form.addEventListener('submit', function(e) {
+         e.preventDefault(); 
+
+         const formData = new FormData(form);
+         const data = {};
+         formData.forEach((value, key) => {data[key] = value;});
+
+         alert('Report is being prepared ...');
+
+         // Send data to server at specified address, in POST body
+         // Receive promise (response from server, or specified file)
+         // Then read and parse the data from the response
+         // Then run success function; or error function  
+
+         fetch('http://172.178.80.5', {    // 'http://192.168.50.172:2002'
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded',},
+            body: JSON.stringify(data) 
+    
+         }).then(response => response.json()).then(responseData => {
+               sessionStorage.setItem('calcResult', JSON.stringify(responseData));
+               window.location.href = 'Index.html';
+
+            }).catch(error => {
+                  alert('Error submitting the form. Please try again later.');
+                  window.location.href = 'Index.html';
+               });
+
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
