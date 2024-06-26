@@ -89,6 +89,7 @@
         padding: 14px 20px;
         transition: background-color 0.3s ease;
         width: 100%;
+        margin-bottom: 20px;
       }
 
       input[type="submit"]:hover {
@@ -110,12 +111,34 @@
           max-width: none;
         }
       }
+      /* creating css loader */
+      #loading {
+        width: 2rem;
+        height: 2rem;
+        border: 5px solid #f3f3f3;
+        border-top: 6px solid #45a049;
+        border-radius: 100%;
+        margin: auto;
+        visibility: hidden;
+        animation: spin 1s infinite linear;
+      }
+      #loading.display {
+        visibility: visible;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body> <!-- Actual HTML for drawing the input form -->
     <div class="container">
       <div class="left-column"> <!-- Descriptive text -->
-        <h1>Example APL Calculator Heading (Test)</h1>
+        <h1>Example APL Calculator Heading</h1>
         <p> Welcome to the Example Calculator. Please fill out the form below to do some APL calculations with. </p>
         <p> APL is fun! </p>
       </div>
@@ -150,13 +173,28 @@
             <input type="number" id="monthlyExpenses" name="monthlyExpenses" required>
           </div>
           <input type="submit" value="Submit">
+          <div id="loading"></div>
         </form>
       </div>
     </div>
     <script>
+
+      // selecting loading div
+      const loader = document.querySelector("#loading");
+
+      // showing loading
+      function displayLoading() {
+        loader.classList.add("display");
+        // to stop loading after some time (8 sec)
+        setTimeout(() => {
+          loader.classList.remove("display");
+        }, 8000);
+      }
+
       const form = document.forms[0]; // getElementById('calcForm');
 
       form.addEventListener('submit', function(e) {
+         displayLoading();
          e.preventDefault(); 
 
          const formData = new FormData(form);
@@ -168,7 +206,7 @@
          // Then read and parse the data from the response
          // Then run success function; or error function  
 
-         fetch('http://172.178.80.5', {    // 'http://192.168.50.172:2002'
+         fetch('http://172.178.80.5', {    // 'http://192.168.50.172'
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded',},
             body: JSON.stringify(data) 
