@@ -182,13 +182,18 @@
       // selecting loading div
       const loader = document.querySelector("#loading");
 
-      // showing loading
+      // showing loading wheel
       function displayLoading() {
         loader.classList.add("display");
-        // to stop loading after some time (8 sec)
+        // to stop loading after some time (30 sec)
         setTimeout(() => {
           loader.classList.remove("display");
-        }, 8000);
+        }, 30000);
+      }
+
+      // hiding loading wheel
+      function hideLoading() {
+        loader.classList.remove("display");
       }
 
       const form = document.forms[0]; // getElementById('calcForm');
@@ -213,9 +218,10 @@
     
          }).then(response => response.json()).then(responseData => {
                sessionStorage.setItem('calcResult', JSON.stringify(responseData));
+               hideLoading();
                window.location.href = 'exampleAppResult.html';
-
             }).catch(error => {
+                  hideLoading();
                   alert('Error submitting the form. Please try again later.');
                   window.location.href = 'exampleAppError404.html';
                });
